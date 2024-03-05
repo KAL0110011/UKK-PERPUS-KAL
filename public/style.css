@@ -1,0 +1,32 @@
+{
+    "vscode_custom_css.imports": [
+        "file:///C:/Users/Public/synthwave/synthwave84.css"
+  ],
+  "files.autoSave": "afterDelay",
+  "workbench.activityBar.location": "hidden",
+  "editor.fontFamily": "Fira Code",
+  "editor.fontSize": 15,
+  "editor.fontLigatures": "Fira Code",
+  "editor.cursorBlinking": "expand",
+  "editor.cursorStyle": "block",
+  "editor.wordWrap": "on",
+  "editor.wrappingIndent": "indent",
+  "editor.minimap.enabled": false,
+  "workbench.colorCustomizations": {
+      "editorCursor.foreground": "#e300ff",
+      "terminalCursor.foreground": "#e300ff",
+      "selection.background": "#8a0073c0",
+      "editor.selectionBackground": "#8a0073c0",
+      "icon.foreground": "#ff00ff",
+      "editor.selectionHighlightBackground": "#8a007342",
+     "editor.wordHighlightBackground": "#ff0ad642"
+   },
+    "workbench.colorTheme": "SynthWave '84",
+    "synthwave84.brightness": 1,
+    "workbench.iconTheme": "material-icon-theme",
+    "material-icon-theme.folders.color": "#e300ff",
+    "material-icon-theme.files.color": "#e300ff",
+    "material-icon-theme.opacity": 1,
+    "material-icon-theme.activeIconPack": "vue",
+    "material-icon-theme.folders.theme": "classic"
+}
