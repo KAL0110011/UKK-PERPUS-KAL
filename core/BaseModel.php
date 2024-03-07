@@ -6,7 +6,7 @@ class BaseModel
 
 	public function __construct()
 	{
-		$this->mysqli = new mysqli('localhost', 'root', '', 'ukk_perpus_kal'); # sesuaikan dengan nama database masing - masing
+		$this->mysqli = new mysqli('localhost', 'root', '', 'ukk-perpus-kal'); # sesuaikan dengan nama database masing - masing
 	}
 
 	public function getByUsername($username)
