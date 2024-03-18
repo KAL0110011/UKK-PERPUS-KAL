@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Mar 2024 pada 05.48
+-- Waktu pembuatan: 18 Mar 2024 pada 04.42
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -35,6 +35,20 @@ CREATE TABLE `buku` (
   `TahunTerbit` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `buku`
+--
+
+INSERT INTO `buku` (`BukuID`, `Judul`, `Penulis`, `Penerbit`, `TahunTerbit`) VALUES
+(1, 'Adolf Hitler : Pikiran, Tindakan, Catatan Kelam Sang Ditaktor', 'M. Muhibbuddin', 'Charissa Publisher', 2020),
+(2, 'Kiprah Politik Soekarno', 'Yonita Yulia Yalinda', 'Anak Hebat Indonesia', 2024),
+(3, 'Muslim Produktif, Muslim Prestatif', 'Bambang Triyawan', 'Elex Media Komputindo', 2021),
+(4, 'Elon Musk: Inovasi, Ambisi, dan Kontroversi', 'Arcturus', 'Bhuana Ilmu Populer', 2024),
+(6, 'Teruslah Bodoh Jangan Pintar', 'Tere Liye', 'Penerbit Sabak Grip', 2024),
+(7, 'Analisis dan Desain Perangkat Lunak', 'Rosa A.S', 'Informatika', 2022),
+(8, 'Filsafat Aristoteles', 'Frederick Copleston', 'basabasi', 2020),
+(9, 'Pengantar Umum Psikoanalisis', 'Sigmund Freud', 'Anak Hebat Indonesia', 2024);
+
 -- --------------------------------------------------------
 
 --
@@ -62,7 +76,7 @@ INSERT INTO `kategoribuku` (`KategoriID`, `NamaKategori`) VALUES
 (9, 'Kutipan'),
 (10, 'Manuskrip dan buku langka'),
 (11, 'filsafat'),
-(12, 'psykologi'),
+(12, 'psychology'),
 (13, 'Epistimologi'),
 (14, 'Parapsikologi dan Okultisme'),
 (15, 'Pemikiran Filosofis'),
@@ -115,7 +129,7 @@ INSERT INTO `kategoribuku` (`KategoriID`, `NamaKategori`) VALUES
 (80, 'Literatur, Sastra, Retorika dan Kritik'),
 (81, 'Sejarah'),
 (82, 'Geografi dan Perjalanan'),
-(83, 'Biografi dan Asal-Usul'),
+(83, 'Asal-Usul'),
 (84, 'Sejarah Dunia Lama'),
 (85, 'Asal–Usul Eropa'),
 (86, 'Asal-Usul Asia'),
@@ -136,6 +150,20 @@ CREATE TABLE `kategoribuku_relasi` (
   `KategoriID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `kategoribuku_relasi`
+--
+
+INSERT INTO `kategoribuku_relasi` (`KategoriBukuID`, `BukuID`, `KategoriID`) VALUES
+(1, 1, 83),
+(2, 2, 41),
+(3, 3, 38),
+(4, 4, 2),
+(6, 6, 1),
+(7, 7, 60),
+(8, 8, 11),
+(9, 9, 12);
+
 -- --------------------------------------------------------
 
 --
@@ -147,6 +175,14 @@ CREATE TABLE `koleksipribadi` (
   `UserID` int(11) NOT NULL,
   `BukuID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `koleksipribadi`
+--
+
+INSERT INTO `koleksipribadi` (`KoleksiID`, `UserID`, `BukuID`) VALUES
+(1, 1, 1),
+(2, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -163,6 +199,14 @@ CREATE TABLE `peminjaman` (
   `StatusPeminjaman` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `peminjaman`
+--
+
+INSERT INTO `peminjaman` (`PeminjamanID`, `UserID`, `BukuID`, `TanggalPeminjaman`, `TanggalPengembalian`, `StatusPeminjaman`) VALUES
+(1, 1, 8, '2024-03-18', NULL, 'Belum di Kembalikan'),
+(3, 1, 4, '2024-03-18', NULL, 'Belum di Kembalikan');
+
 -- --------------------------------------------------------
 
 --
@@ -176,6 +220,13 @@ CREATE TABLE `ulasanbuku` (
   `Ulasan` text DEFAULT NULL,
   `Rating` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `ulasanbuku`
+--
+
+INSERT INTO `ulasanbuku` (`UlasanID`, `UserID`, `BukuID`, `Ulasan`, `Rating`) VALUES
+(1, 1, 8, 'membingungkan', 5);
 
 -- --------------------------------------------------------
 
@@ -199,8 +250,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`UserID`, `Username`, `Password`, `Email`, `NamaLengkap`, `Alamat`, `Role`) VALUES
 (1, 'NARUTO', '$2y$10$hgeQPR8E06gwJg4OkI.HF./HG8zqe/rnDi.HfL.3QqR35gPe5aIq6', 'naruto@shipuden.com', 'Uzumaki Naruto', 'konoha', 'Peminjam'),
-(2, 'KAL', '$2y$10$B.4D7pEShkzpmFw5nTspvuHGeLQbTmn96vK5qFsQgcjM0o9sMZr8u', 'haikal010@gmail.com', 'Haikal Mubarok', 'World', 'Administrator'),
-(3, 'KiRA', '$2y$10$KzmXfMeZ7o.Eij0y8ge/xec0rkPZzoeA4abBTcv1rxv5Yax.BGQWS', 'death@note.com', 'Light Yagami', 'Tokyo', 'Petugas');
+(3, 'KiRA', '$2y$10$KzmXfMeZ7o.Eij0y8ge/xec0rkPZzoeA4abBTcv1rxv5Yax.BGQWS', 'death@note.com', 'Light Yagami', 'Tokyo', 'Petugas'),
+(4, 'KAL', '$2y$10$Qt71YX2VWXNZAqDOf432lezm/QcXmmIuuww5Valx9XJGaH0pwCP8.', 'kal0101@gmail.com', 'Haikal Mubarok', 'word', 'Administrator'),
+(5, 'YOHAN', '$2y$10$0itfnBSf7ItgZ6zMc5h9GeLzZWg/J21gMVA4RHIxN60VZ8ETMSho.', 'nameless@monster.com', 'Yohan Liebert', 'cekoslowaki', 'Petugas');
 
 --
 -- Indexes for dumped tables
@@ -265,7 +317,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `BukuID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `BukuID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategoribuku`
@@ -277,31 +329,31 @@ ALTER TABLE `kategoribuku`
 -- AUTO_INCREMENT untuk tabel `kategoribuku_relasi`
 --
 ALTER TABLE `kategoribuku_relasi`
-  MODIFY `KategoriBukuID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `KategoriBukuID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `koleksipribadi`
 --
 ALTER TABLE `koleksipribadi`
-  MODIFY `KoleksiID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `KoleksiID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `PeminjamanID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PeminjamanID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `ulasanbuku`
 --
 ALTER TABLE `ulasanbuku`
-  MODIFY `UlasanID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `UlasanID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
